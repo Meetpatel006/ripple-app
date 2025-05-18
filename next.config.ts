@@ -10,11 +10,8 @@ const nextConfig: NextConfig = {
     // Ignoring type checking issues for now
     ignoreBuildErrors: true,
   },
-  // Use server components for everything by default
-  experimental: {
-    // Note: this is optional and shouldn't affect the error
-    serverComponentsExternalPackages: ['@prisma/client'],
-  },
+  // Use server-side external packages
+  serverExternalPackages: ['@prisma/client'],
   webpack(config) {
     // Configure webpack to handle SVG files
     config.module.rules.push({

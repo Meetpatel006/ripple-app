@@ -12,28 +12,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Navigation Bar - temporarily commented out */}
-      {/* <nav className="relative z-20 container mx-auto px-4 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="bg-white w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex items-center justify-center rounded transition-all duration-300">
-            <span className="text-[#0a0f2d] font-bold text-base sm:text-lg md:text-xl">‖</span>
-          </div>
-          <span className="text-white text-xl sm:text-xl md:text-2xl font-bold">Slide</span>
-        </div>
-        
-        <div className="hidden md:flex items-center gap-10">
-          <a href="#features" className="text-white hover:text-white/80 transition-colors">Features</a>
-          <a href="#about" className="text-white hover:text-white/80 transition-colors">About</a>
-        </div>
-        
-        <Button 
-          variant="outline" 
-          className="bg-white text-[#0a0f2d] hover:bg-gray-100 font-medium px-4 py-1 h-auto text-sm rounded-md border-transparent"
-        >
-          Login
-        </Button>
-      </nav> */}
-
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 text-center max-w-5xl flex-grow flex flex-col items-center justify-center pt-10 pb-10">
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-8">
@@ -60,9 +38,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-
-      {/* Bottom Images - removed as they don't appear in the reference image */}
     </div>
   );
-};
+}
 
