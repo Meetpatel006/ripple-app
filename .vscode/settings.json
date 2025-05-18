@@ -1,0 +1,4 @@
+{
+    "zencoder.enableRepoIndexing": true,
+    "C_Cpp.errorSquiggles": "enabled"
+}

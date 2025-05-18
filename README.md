@@ -1,8 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ripple - Community Engagement Platform
+
+![Ripple](public/image.png)
+
+Ripple is a modern community engagement platform built with Next.js that helps teams connect, collaborate, and grow their communities. With a suite of integrated tools for real-time communication, event management, polls, and social media integration, Ripple provides everything you need to build and nurture vibrant communities.
+
+## Features
+
+- **Real-time Collaboration**: Connect your team with instant messaging, media sharing, and interactive reactions
+- **Event & Calendar Management**: Plan, organize and track events with integrated scheduling and RSVPs
+- **Data-driven Insights**: Gather feedback and make informed decisions with interactive polls and visualized results
+- **Community Forums**: Build knowledge bases with organized discussions and expert verification features
+- **Personalized Content**: Deliver tailored updates with an AI-powered feed that learns user preferences
+- **Third-party Integrations**: Connect with your favorite tools and existing workflows
+- **Social Media Automation**: Manage social media posts and interactions through integrations with Instagram, Facebook, and Twitter
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **UI Components**: Radix UI, shadcn/ui
+- **Styling**: Tailwind CSS, Emotion
+- **Authentication**: Clerk
+- **Database**: PostgreSQL with Prisma ORM
+- **State Management**: React Context API
+- **Animations**: Framer Motion
+
+## Prerequisites
+
+- Node.js 18+ and npm/yarn/pnpm
+- PostgreSQL database
+- Clerk account for authentication
+
+## Environment Setup
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/ripple"
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Set up the database:
+
+```bash
+npx prisma migrate dev
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +67,41 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── prisma/              # Database schema and migrations
+├── public/              # Static assets
+├── src/
+│   ├── app/             # Next.js App Router pages
+│   │   ├── (auth)/      # Authentication routes
+│   │   ├── (protected)/ # Protected dashboard routes
+│   │   ├── (website)/   # Public website routes
+│   │   ├── api/         # API routes
+│   ├── components/      # React components
+│   │   ├── global/      # Global components
+│   │   ├── ui/          # UI components
+│   ├── lib/             # Utility functions
+│   ├── providers/       # React context providers
+│   ├── svgs/            # SVG components
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The application can be deployed on Vercel or any other hosting platform that supports Next.js applications.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 Ripple. All rights reserved.
