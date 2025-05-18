@@ -10,8 +10,11 @@ const nextConfig: NextConfig = {
     // Ignoring type checking issues for now
     ignoreBuildErrors: true,
   },
-  // Disabling static export for now as the app uses API routes
-  // output: 'export',
+  // Use server components for everything by default
+  experimental: {
+    // Note: this is optional and shouldn't affect the error
+    serverComponentsExternalPackages: ['@prisma/client'],
+  },
   webpack(config) {
     // Configure webpack to handle SVG files
     config.module.rules.push({

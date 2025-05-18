@@ -6,9 +6,6 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import "./globals.css";
 import { Toaster } from "sonner";
 
-// Force dynamic rendering for the entire app
-export const dynamic = 'force-dynamic';
-
 const inter = Inter({ subsets: ["latin"] });
 
 const geistSans = Geist({

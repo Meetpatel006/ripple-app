@@ -1,8 +1,5 @@
 import { Button } from "@/components/ui/button";
 
-// Force dynamic rendering to prevent static page generation issues
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-[#0a0f2d] to-[#1e2455] min-h-screen w-full flex flex-col">
