@@ -5,9 +5,9 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
-type Props = {};
+type Props = object;
 
-const Page = (props: Props) => {
+const Page = () => {
   const router = useRouter();
 
   const handleGuestSignIn = () => {

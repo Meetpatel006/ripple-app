@@ -2,10 +2,9 @@ import React from 'react';
 import { SearchIcon } from 'lucide-react';
 import {Input} from '@/components/ui/input';
 
-type Props = {   
-}
+type Props = object;
 
-const Search = (props: Props) => {
+const Search = () => {
   return (
     <div className="flex items-center gap-x-2 px-3 py-2 bg-[#1E1E1E] rounded-full w-[280px] border border-[#333336] hover:border-[#3352CC] transition-colors">
       <SearchIcon className="w-4 h-4 text-[#9B9CA0]" />

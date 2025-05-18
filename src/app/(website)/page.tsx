@@ -1,6 +1,7 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+// Force dynamic rendering to prevent static page generation issues
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (

@@ -10,7 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function CreateEventPage({ params }: { params: { slug: string } }) {
+export default function CreateEventPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -49,11 +49,10 @@ export default function CreateEventPage({ params }: { params: { slug: string } }
         datetime: `${date}T${time}`,
         capacity: capacity ? parseInt(capacity) : undefined,
         isPublic,
-        image: selectedImage
-      });
+        image: selectedImage      });
       
       // Navigate back to events
-      router.push(`/dashboard/${params.slug}/events`);
+      router.push('/dashboard/events');
     } catch (error) {
       console.error('Error creating event:', error);
     } finally {
@@ -85,9 +84,9 @@ export default function CreateEventPage({ params }: { params: { slug: string } }
         </div>
         {/* Breadcrumb */}
         <nav className="flex items-center text-sm text-gray-400">
-          <span onClick={() => router.push(`/dashboard/${params.slug}`)} className="hover:text-white transition-colors cursor-pointer">Home</span>
+          <span onClick={() => router.push('/dashboard')} className="hover:text-white transition-colors cursor-pointer">Home</span>
           <span className="mx-2">/</span>
-          <span onClick={() => router.push(`/dashboard/${params.slug}/events`)} className="hover:text-white transition-colors cursor-pointer">Events</span>
+          <span onClick={() => router.push('/dashboard/events')} className="hover:text-white transition-colors cursor-pointer">Events</span>
           <span className="mx-2">/</span>
           <span className="text-white">Create Event</span>
         </nav>

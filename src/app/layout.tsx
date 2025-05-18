@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/theme-provider"
 import { GuestAuthProvider } from "@/providers/guest-auth-provider"
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import "./globals.css";
 import { Toaster } from "sonner";
+
+// Force dynamic rendering for the entire app
+export const dynamic = 'force-dynamic';
 
 const inter = Inter({ subsets: ["latin"] });
 

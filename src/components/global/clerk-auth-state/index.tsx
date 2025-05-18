@@ -9,7 +9,7 @@ import {
   UserButton,
   useClerk,
 } from '@clerk/nextjs';
-import { User, UserMinus, ChevronDown, LogIn, LogOut } from 'lucide-react';
+import { User, ChevronDown, LogIn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/global/loader';
 import { useGuestAuth } from '@/providers/guest-auth-provider';
@@ -22,28 +22,21 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-type Props = {};
+type Props = object;
 
-const ClerkAuthState = (props: Props) => {
+const ClerkAuthState = () => {
   const { isGuestUser, signInAsGuest, signOutGuest } = useGuestAuth();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { signOut } = useClerk();
 
   const handleGuestSignIn = () => {
     signInAsGuest();
-    setIsOpen(false);
   };
 
   const handleGuestSignOut = () => {
     signOutGuest();
     router.push('/');
-  };
-
-  const handleSignIn = () => {
-    router.push('/sign-in');
-    setIsOpen(false);
   };
   
   const handleSignOut = async () => {

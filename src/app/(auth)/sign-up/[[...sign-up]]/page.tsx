@@ -1,9 +1,9 @@
-import { SignIn, SignUp } from '@clerk/nextjs';
+import { SignUp } from '@clerk/nextjs';
 import React from 'react';
 
-type Props = {};
+type Props = object;
 
-const Page = (props: Props) => {
+const Page = () => {
   return <SignUp />;
 };
 

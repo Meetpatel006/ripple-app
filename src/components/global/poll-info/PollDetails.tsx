@@ -12,16 +12,27 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 // More vibrant colors that work well on dark backgrounds
 const COLORS = ["#8B5CF6", "#10B981", "#F59E0B", "#EF4444", "#3B82F6", "#EC4899"];
 
+interface PollResult {
+  option: string;
+  votes: number;
+}
+
+interface PollResultData {
+  pollId: string;
+  question: string;
+  totalVotes: number;
+  results: PollResult[];
+}
+
 interface PollDetailsProps {
   pollId: string | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function PollDetails({ pollId, isOpen, onClose }: PollDetailsProps) {
-  const [activeTab, setActiveTab] = useState<'results' | 'details'>('results');
+export default function PollDetails({ pollId, isOpen, onClose }: PollDetailsProps) {  const [activeTab, setActiveTab] = useState<'results' | 'details'>('results');
   const [isLoading, setIsLoading] = useState(true);
-  const [pollData, setPollData] = useState<any>(null);
+  const [pollData, setPollData] = useState<PollResultData | null>(null);
   
   // Simulate loading data
   useState(() => {
@@ -105,9 +116,8 @@ export default function PollDetails({ pollId, isOpen, onClose }: PollDetailsProp
                         {pollData?.results.map((_: any, index: number) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
-                      </Pie>
-                      <Tooltip 
-                        formatter={(value: number) => [`${value} votes (${((value / pollData.totalVotes) * 100).toFixed(1)}%)`, 'Votes']}
+                      </Pie>                      <Tooltip 
+                        formatter={(value: number) => [`${value} votes (${((value / (pollData?.totalVotes || 1)) * 100).toFixed(1)}%)`, 'Votes']}
                         contentStyle={{ 
                           backgroundColor: '#1F2937',
                           borderColor: '#374151',

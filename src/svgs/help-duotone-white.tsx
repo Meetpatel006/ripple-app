@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HelpDuoToneWhiteProps extends React.SVGProps<SVGSVGElement> {}
+type HelpDuoToneWhiteProps = React.SVGProps<SVGSVGElement>;
 
 const HelpDuoToneWhite: React.FC<HelpDuoToneWhiteProps> = ({ className, ...props }) => {
   return (
