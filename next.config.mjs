@@ -32,12 +32,16 @@ const nextConfig = {
     "@emotion/serialize",
     "@emotion/sheet"
   ],
-  // Configure CSS optimization more carefully
+  // Configure Next.js options carefully
   experimental: {
     // Disable optimizeCss since it requires critters which is causing issues
     optimizeCss: false,
-    optimizeServerReact: true
-  }
+    optimizeServerReact: true,
+    // Enable more stable features for route groups
+    serverComponentsExternalPackages: ['@prisma/client']
+  },
+  // Ensure proper handling of route groups
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx']
 };
 
 export default nextConfig;

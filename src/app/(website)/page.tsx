@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 
+// Add metadata export for better SEO and page configuration
+export const metadata = {
+  title: 'Slide - Transform Your Instagram Engagement',
+  description: 'Slide revolutionizes how you connect with your audience on Instagram. Automate responses and boost engagement effortlessly.',
+};
+
 export default function Home() {
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-[#0a0f2d] to-[#1e2455] min-h-screen w-full flex flex-col">
@@ -17,21 +23,21 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-8">
           Transform Your<br />Instagram Engagement<br />with Slide
         </h1>
-        
+
         <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-12">
-          Slide revolutionizes how you connect with your audience on Instagram. Automate 
+          Slide revolutionizes how you connect with your audience on Instagram. Automate
           responses and boost engagement effortlessly, turning interactions into valuable business
           opportunities.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-          <Button 
+          <Button
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-6 h-auto text-lg rounded-md"
           >
             Get Started
           </Button>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="bg-white text-slate-900 hover:bg-gray-100 font-medium px-8 py-6 h-auto text-lg rounded-md border-transparent"
           >
             Learn More

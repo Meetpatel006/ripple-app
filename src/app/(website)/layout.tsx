@@ -1,5 +1,15 @@
 import React from 'react';
 import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
+
+// Define metadata for the website route group
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Slide',
+    default: 'Slide - Transform Your Instagram Engagement',
+  },
+  description: 'Slide revolutionizes how you connect with your audience on Instagram.',
+};
 
 // Load Inter font with specific weights
 const inter = Inter({
