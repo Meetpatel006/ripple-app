@@ -365,7 +365,7 @@ export default function Home() {
       <footer className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 bg-[#080808] border-t border-[#1F1F1F]">
         <div className="max-w-7xl mx-auto border-t border-[#1F1F1F]">
           <div className="flex flex-row justify-between items-center flex-wrap gap-4 pt-8">
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Slice. All rights reserved.</p>
+            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Ripple. All rights reserved.</p>
             <ul className="flex space-x-6">
               <li><Link href="#" className="text-gray-500 hover:text-white text-sm hover:underline">Privacy Policy</Link></li>
               <li><Link href="#" className="text-gray-500 hover:text-white text-sm hover:underline">Terms of Service</Link></li>
