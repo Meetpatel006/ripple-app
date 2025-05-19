@@ -1,6 +1,7 @@
-import type { NextConfig } from "next";
+// @ts-check
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   /* config options here */
   eslint: {
     // Disable ESLint during production builds for faster builds
@@ -30,7 +31,12 @@ const nextConfig: NextConfig = {
     "@emotion/cache",
     "@emotion/serialize",
     "@emotion/sheet"
-  ]
+  ],
+  // Add experimental features to help with CSS handling
+  experimental: {
+    optimizeCss: true,
+    optimizeServerReact: true
+  }
 };
 
 export default nextConfig;
