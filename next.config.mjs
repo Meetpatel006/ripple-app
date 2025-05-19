@@ -32,9 +32,10 @@ const nextConfig = {
     "@emotion/serialize",
     "@emotion/sheet"
   ],
-  // Add experimental features to help with CSS handling
+  // Configure CSS optimization more carefully
   experimental: {
-    optimizeCss: true,
+    // Disable optimizeCss since it requires critters which is causing issues
+    optimizeCss: false,
     optimizeServerReact: true
   }
 };
