@@ -1,99 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EventCard from "@/components/global/event-card/EventCard";
 import { Clock, Calendar, Search, Plus, Filter, MapPin } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-const mockEvents = [
-  {
-    id: 1,
-    title: "Tech Talk: AI & Startups",
-    location: "Auditorium A",
-    datetime: "2025-06-10T17:00",
-    description: "Join us to explore how AI is reshaping the startup ecosystem.",
-    attendees: 48,
-    host: "AI Research Lab",
-    thumbnail: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },  {
-    id: 2,
-    title: "Design Sprint Workshop",
-    location: "Room 204",
-    datetime: "2025-06-12T14:00",
-    description: "Hands-on session on rapid prototyping and UX design.",
-    attendees: 32,
-    host: "Design Team",
-    thumbnail: "https://images.unsplash.com/photo-1558403194-611308249627?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },
-  {
-    id: 3,
-    title: "Campus Hackathon",
-    location: "Lab 3",
-    datetime: "2025-06-15T10:00",
-    description: "Form teams and build your dream project in 24 hours!",
-    attendees: 120,
-    host: "DevHub Community",
-    thumbnail: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },
-  {
-    id: 4,
-    title: "Networking Mixer",
-    location: "Main Hall",
-    datetime: "2025-06-18T18:30",
-    description: "Connect with professionals from various tech companies in a casual setting.",
-    attendees: 85,
-    host: "Career Services",
-    thumbnail: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },
-  {
-    id: 5,
-    title: "Product Management 101",
-    location: "Room 105",
-    datetime: "2025-06-20T15:00",
-    description: "Learn the basics of product management from industry experts.",
-    attendees: 56,
-    host: "Product School",
-    thumbnail: "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },
-  {
-    id: 6,
-    title: "Web 3.0 Conference",
-    location: "Grand Auditorium",
-    datetime: "2025-06-25T09:00",
-    description: "Exploring the future of the web with blockchain, decentralization, and more.",
-    attendees: 210,
-    host: "Blockchain Alliance",
-    thumbnail: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032&auto=format&fit=crop&ixlib=rb-4.0.3",
-  },
-];
-
 export default function EventsPage() {
   const [filterType, setFilterType] = useState<'all' | 'upcoming' | 'past'>('upcoming');
   const [searchQuery, setSearchQuery] = useState('');
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    async function fetchEvents() {
+      setLoading(true);
+      const res = await fetch('/api/events');
+      const data = await res.json();
+      setEvents(data);
+      setLoading(false);
+    }
+    fetchEvents();
+  }, []);
+
   const handleCreateEvent = () => {
     router.push('/dashboard/events/create');
   };
 
-  const filteredEvents = mockEvents.filter(event => {
+  const filteredEvents = events.filter(event => {
     // Filter by search query
     if (searchQuery && !event.title.toLowerCase().includes(searchQuery.toLowerCase()) && 
         !event.description.toLowerCase().includes(searchQuery.toLowerCase())) {
       return false;
     }
-    
     // Filter by event type
     const eventDate = new Date(event.datetime);
     const today = new Date();
-    
     if (filterType === 'upcoming' && eventDate < today) {
       return false;
     }
-    
     if (filterType === 'past' && eventDate >= today) {
       return false;
     }
-    
     return true;
   });
 
@@ -183,9 +131,13 @@ export default function EventsPage() {
 
       {/* Events Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredEvents.length > 0 ? (
+        {loading ? (
+          <div className="col-span-full bg-[#18181b] border border-[#23232A] p-8 rounded-xl text-center">
+            <p className="text-gray-400">Loading events...</p>
+          </div>
+        ) : filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <EventCard key={event._id || event.id} event={event} />
           ))
         ) : (
           <div className="col-span-full bg-[#18181b] border border-[#23232A] p-8 rounded-xl text-center">

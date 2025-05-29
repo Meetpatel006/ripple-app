@@ -64,13 +64,13 @@ export default function PollsPage() {
         <Tabs defaultValue="manage" value={activeTab} onValueChange={(value) => setActiveTab(value as 'create' | 'manage')} className="w-full">
           <div className="border-b border-[#23232A]">
             <div className="flex items-center justify-between px-6 py-4">
-              <TabsList className="bg-[#23232A] grid grid-cols-2 w-64">
+              <TabsList className="bg-[#23232A] border border-[#2D2D35] shadow-sm grid grid-cols-2 w-64">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <TabsTrigger 
                         value="create" 
-                        className="data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+                        className="text-gray-200 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:border-purple-600 border-none"
                       >
                         <PlusCircle className="h-4 w-4 mr-2" />
                         Create Poll
@@ -89,7 +89,7 @@ export default function PollsPage() {
                     <TooltipTrigger asChild>
                       <TabsTrigger 
                         value="manage" 
-                        className="data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+                        className="text-gray-200 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:border-purple-600 border-none"
                       >
                         <BarChart2 className="h-4 w-4 mr-2" />
                         Manage Polls

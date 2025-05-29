@@ -47,7 +47,7 @@ export default function PollList({ searchQuery }: PollListProps) {
               <AlertCircle className="h-6 w-6 text-gray-400" />
             </div>
             <h3 className="text-lg font-medium text-white mb-1">No matching polls found</h3>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-300 max-w-md">
               We couldn't find any polls matching "{searchQuery}". Try a different search term.
             </p>
           </>
@@ -57,7 +57,7 @@ export default function PollList({ searchQuery }: PollListProps) {
               <BarChart2 className="h-6 w-6 text-gray-400" />
             </div>
             <h3 className="text-lg font-medium text-white mb-1">No polls created yet</h3>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-300 max-w-md">
               You haven't created any polls yet. Switch to the "Create Poll" tab to get started.
             </p>
           </>
@@ -67,20 +67,20 @@ export default function PollList({ searchQuery }: PollListProps) {
   }
   return (
     <div className="space-y-6">
-      <div className="text-sm text-gray-400">
+      <div className="text-sm text-gray-300">
         Showing {filteredPolls.length} poll{filteredPolls.length !== 1 ? 's' : ''}
       </div>
       
       <div className="space-y-4">
         {filteredPolls.map((poll) => (
-          <div key={poll.id} className="bg-[#23232A] border border-[#2D2D35] rounded-xl overflow-hidden hover:border-[#3D3D45] transition-colors duration-200 cursor-pointer" onClick={() => handleViewResults(poll.id)}>
+          <div key={poll.id} className="bg-[#23232A] border border-[#2D2D35] rounded-xl overflow-hidden hover:border-purple-600 transition-colors duration-200 cursor-pointer shadow-md" onClick={() => handleViewResults(poll.id)}>
             <div className="p-4 sm:p-5">
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-2 line-clamp-1">
                     {poll.question}
                   </h3>
-                  <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
+                  <div className="flex items-center gap-4 text-sm text-gray-300 mb-3">
                     <div className="flex items-center gap-1.5">
                       <User size={14} />
                       <span>{poll.participants} responses</span>
@@ -95,7 +95,7 @@ export default function PollList({ searchQuery }: PollListProps) {
                     {poll.options.map((option, i) => (
                       <div 
                         key={i} 
-                        className="bg-[#18181b] border border-[#2D2D35] px-3 py-1 rounded-full text-sm text-gray-300"
+                        className="bg-[#18181b] border border-[#2D2D35] px-3 py-1 rounded-full text-sm text-gray-200"
                       >
                         {option}
                       </div>
@@ -105,16 +105,16 @@ export default function PollList({ searchQuery }: PollListProps) {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-200" onClick={(e) => e.stopPropagation()}>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-300 hover:text-white focus:ring-2 focus:ring-purple-600" onClick={(e) => e.stopPropagation()}>
                       <MoreVertical size={16} />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-[#18181b] border border-[#2D2D35] text-gray-300">
-                    <DropdownMenuItem className="hover:bg-[#23232A] cursor-pointer">
+                  <DropdownMenuContent align="end" className="bg-[#23232A] border border-[#2D2D35] text-gray-200 shadow-lg">
+                    <DropdownMenuItem className="hover:bg-purple-600 hover:text-white cursor-pointer">
                       <Edit2 size={14} className="mr-2" />
                       <span>Edit Poll</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="hover:bg-[#23232A] cursor-pointer" onClick={(e) => {
+                    <DropdownMenuItem className="hover:bg-purple-600 hover:text-white cursor-pointer" onClick={(e) => {
                       e.stopPropagation();
                       handleViewResults(poll.id);
                     }}>
@@ -123,7 +123,7 @@ export default function PollList({ searchQuery }: PollListProps) {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator className="bg-[#2D2D35]" />
                     <DropdownMenuItem 
-                      className="text-red-500 hover:text-red-400 hover:bg-red-900/20 cursor-pointer"
+                      className="text-red-500 hover:text-white hover:bg-red-600/80 cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeletePoll(poll.id);
@@ -142,18 +142,18 @@ export default function PollList({ searchQuery }: PollListProps) {
                 <span className={`h-2 w-2 rounded-full ${
                   poll.status === 'active' ? 'bg-green-500' : 'bg-gray-500'
                 }`}></span>
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-gray-200">
                   {poll.status === 'active' ? 'Active' : 'Ended'}
                 </span>
               </div>
               
               <div>
                 {poll.endDate ? (
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-gray-200">
                     Ends {format(new Date(poll.endDate), 'MMM d, yyyy')}
                   </span>
                 ) : (
-                  <span className="text-sm text-gray-400">No end date</span>
+                  <span className="text-sm text-gray-200">No end date</span>
                 )}
               </div>
             </div>

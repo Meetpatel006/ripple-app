@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, MapPin, Clock, Users, ExternalLink, Share2 } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, ExternalLink, Share2, MoreVertical } from 'lucide-react';
 import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 interface Event {
-  id: number;
+  id?: number;
+  _id?: string;
   title: string;
   location: string;
   datetime: string;
@@ -21,8 +23,28 @@ interface EventCardProps {
 
 export default function EventCard({ event }: EventCardProps) {
   const [rsvp, setRsvp] = useState(false);
+  const router = useRouter();
+  const [deleting, setDeleting] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleRSVP = () => setRsvp(!rsvp);
+
+  const handleEdit = () => {
+    router.push(`/dashboard/events/edit/${event._id || event.id}`);
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this event?')) return;
+    setDeleting(true);
+    try {
+      await fetch(`/api/events/${event._id || event.id}`, { method: 'DELETE' });
+      window.location.reload(); // Or trigger a state update in parent
+    } catch (err) {
+      alert('Failed to delete event');
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const eventDate = new Date(event.datetime);
   const isPastEvent = eventDate < new Date();
@@ -32,7 +54,33 @@ export default function EventCard({ event }: EventCardProps) {
   const formattedTime = format(eventDate, 'h:mm a');
 
   return (
-    <div className="bg-[#18181b] border border-[#23232A] rounded-xl overflow-hidden hover:border-[#3D3D45] transition-all duration-200 flex flex-col h-full">
+    <div className="bg-[#18181b] border border-[#23232A] rounded-xl overflow-hidden hover:border-[#3D3D45] transition-all duration-200 flex flex-col h-full relative">
+      {/* Three-dot menu in the top right of the card, always visible */}
+      <div className="absolute top-4 right-4 z-30">
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          className="p-1.5 rounded-full hover:bg-[#23232A] text-gray-400 hover:text-gray-200 focus:outline-none shadow-lg bg-[#18181b]"
+        >
+          <MoreVertical className="h-5 w-5" />
+        </button>
+        {menuOpen && (
+          <div className="absolute right-0 mt-2 w-32 bg-[#23232A] border border-[#3D3D45] rounded-lg shadow-lg py-1 flex flex-col">
+            <button
+              onClick={() => { setMenuOpen(false); handleEdit(); }}
+              className="px-4 py-2 text-left text-sm text-blue-500 hover:bg-[#18181b] hover:text-blue-600 rounded-t-lg"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => { setMenuOpen(false); handleDelete(); }}
+              disabled={deleting}
+              className="px-4 py-2 text-left text-sm text-red-500 hover:bg-[#18181b] hover:text-red-600 rounded-b-lg"
+            >
+              {deleting ? 'Deleting...' : 'Delete'}
+            </button>
+          </div>
+        )}
+      </div>
       {/* Event Image */}
       {event.thumbnail && (
         <div className="relative w-full h-32">
@@ -41,28 +89,12 @@ export default function EventCard({ event }: EventCardProps) {
             alt={event.title} 
             className="w-full h-full object-cover"
           />
-          
-          {/* Overlay date badge */}
-          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-xs flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
-            {formattedDate}
-          </div>
-          
-          {isPastEvent && (
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-              <span className="bg-red-500/80 text-white text-sm px-3 py-1 rounded-full font-medium">
-                Event Ended
-              </span>
-            </div>
-          )}
         </div>
       )}
-      
       <div className="p-4 flex-grow">
         <div className="flex justify-between items-start mb-2">
           <h2 className="text-lg font-semibold text-white">{event.title}</h2>
         </div>
-        
         <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
           <Clock className="h-3.5 w-3.5" />
           <span>{formattedTime}</span>
@@ -70,9 +102,12 @@ export default function EventCard({ event }: EventCardProps) {
           <MapPin className="h-3.5 w-3.5" />
           <span>{event.location}</span>
         </div>
-        
         <p className="text-sm text-gray-300 mb-4 line-clamp-2">{event.description}</p>
-        
+        {/* Date below description */}
+        <div className="flex items-center gap-1 text-xs text-gray-400 mb-3">
+          <Calendar className="h-3 w-3" />
+          <span>{formattedDate}</span>
+        </div>
         {event.host && (
           <div className="flex items-center mt-2 mb-3">
             <div className="h-5 w-5 rounded-full bg-[#2D2D35] flex items-center justify-center text-xs text-gray-300 mr-2">
